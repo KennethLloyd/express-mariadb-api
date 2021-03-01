@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { formatUser } = require('../helpers/utils');
+const { Op } = require('sequelize');
 
 /**
 @api {post} /auth/signup Sign Up User
@@ -149,12 +150,27 @@ const editProfile = async (req, res) => {
   }
 
   try {
+    if (req.body.email) {
+      // search emails except own email
+      const duplicate = await User.findOne({
+        where: {
+          email: req.body.email,
+          id: { [Op.ne]: req.user.id }
+        }
+      });
+
+      if (duplicate) {
+        throw err(400, `Email already exists`);
+      }
+    }
+
     updates.map((update) => (req.user[update] = req.body[update]));
 
     await req.user.save();
 
     return res.send({ user: formatUser(req.user) });
   } catch (e) {
+    console.log(e);
     return res.status(500).send({ error: 'Internal Server Error' });
   }
 };
