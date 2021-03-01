@@ -5,6 +5,14 @@ const formatUser = (raw) => {
   return user;
 };
 
+const err = (statusCode, message) => {
+  const error = new Error(message);
+  error.status = statusCode;
+
+  return error;
+};
+
 module.exports = {
   formatUser,
+  err,
 };

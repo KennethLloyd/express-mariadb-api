@@ -8,7 +8,21 @@
     "dev": "nodemon src/index.js",
     "docs": "./node_modules/.bin/apidoc -i src/controllers -o docs",
     "lint": "eslint src/**",
-    "lint-fix": "eslint src/** --fix"
+    "lint-fix": "eslint src/** --fix",
+    "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md"
+  },
+  "auto-changelog": {
+    "commitLimit": false,
+    "unreleased": true,
+    "replaceText": {
+      "[Cc]hanges": "",
+      "[Ff]ix": "",
+      "[Bb]reak": "",
+      "[Aa]dd": ""
+    },
+    "includeBranch": [
+      "master"
+    ]
   },
   "engines": {
     "node": ">=12.0.0"
@@ -38,10 +52,10 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.3",
-    "moment": "^2.29.1",
     "sequelize": "^6.5.0"
   },
   "devDependencies": {
+    "auto-changelog": "^2.2.1",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-node": "^4.1.0",

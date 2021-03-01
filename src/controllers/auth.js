@@ -1,6 +1,6 @@
-const { User } = require('../models');
-const { formatUser } = require('../helpers/utils');
 const { Op } = require('sequelize');
+const { User } = require('../models');
+const { formatUser, err } = require('../helpers/utils');
 
 /**
 @api {post} /auth/signup Sign Up User
@@ -38,11 +38,10 @@ const signUp = async (req, res) => {
     const user = await User.findOne({ where: { email: req.body.email } });
 
     if (user) {
-      return res.status(400).send({ error: 'Email already exists' });
+      throw err(400, 'Email already exists');
     }
 
     const newUser = new User(req.body);
-
     await newUser.save();
 
     const token = await newUser.generateAuthToken();
@@ -50,6 +49,10 @@ const signUp = async (req, res) => {
     return res.status(201).send({ user: formatUser(newUser), token });
   } catch (e) {
     console.log(e);
+
+    if (e.status) {
+      return res.status(e.status).send({ error: e.message });
+    }
     return res.status(500).send({ error: 'Internal Server Error' });
   }
 };
@@ -91,7 +94,7 @@ const logIn = async (req, res) => {
     );
 
     if (user === null) {
-      return res.status(400).send({ error: 'Invalid credentials' });
+      throw err(400, 'Invalid credentials');
     }
 
     const token = await user.generateAuthToken();
@@ -99,6 +102,10 @@ const logIn = async (req, res) => {
     return res.send({ user: formatUser(user), token });
   } catch (e) {
     console.log(e);
+
+    if (e.status) {
+      return res.status(e.status).send({ error: e.message });
+    }
     return res.status(500).send({ error: 'Internal Server Error' });
   }
 };
@@ -146,7 +153,7 @@ const editProfile = async (req, res) => {
   ); // only returns true if all conditions are satisfied
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates' });
+    throw err(400, 'Invalid updates');
   }
 
   try {
@@ -155,8 +162,8 @@ const editProfile = async (req, res) => {
       const duplicate = await User.findOne({
         where: {
           email: req.body.email,
-          id: { [Op.ne]: req.user.id }
-        }
+          id: { [Op.ne]: req.user.id },
+        },
       });
 
       if (duplicate) {
@@ -171,6 +178,10 @@ const editProfile = async (req, res) => {
     return res.send({ user: formatUser(req.user) });
   } catch (e) {
     console.log(e);
+
+    if (e.status) {
+      return res.status(e.status).send({ error: e.message });
+    }
     return res.status(500).send({ error: 'Internal Server Error' });
   }
 };
