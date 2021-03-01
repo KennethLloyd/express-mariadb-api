@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const sequelize = require('../db/sequelize');
 
 const User = sequelize.define(
@@ -41,18 +40,6 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tokens: {
-      type: DataTypes.TEXT,
-      get() {
-        if (this.getDataValue('tokens')) {
-          return this.getDataValue('tokens').split(',');
-        }
-        return [];
-      },
-      set(value) {
-        this.setDataValue('tokens', value.join());
-      },
-    },
   },
   {
     timestamps: true, // adds createdAt and updatedAt for each new entry
@@ -61,13 +48,9 @@ const User = sequelize.define(
 
 User.prototype.generateAuthToken = async function () {
   const user = this;
-  const { id, tokens } = user;
+  const { id } = user;
 
-  const token = jwt.sign({ id: id.toString() }, config.get('jwtSecret'));
-  tokens.push(token);
-
-  user.tokens = tokens;
-  await user.save();
+  const token = jwt.sign({ id: id.toString() }, process.env.JWT_SECRET);
 
   return token;
 };

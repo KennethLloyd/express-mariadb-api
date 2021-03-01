@@ -1,12 +1,14 @@
 const { Sequelize } = require('sequelize');
-const config = require('config');
 
-const sequelize = new Sequelize(config.get('dbURI'), {
-  username: config.get('dbUser'),
-  password: config.get('dbPassword'),
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+
+const sequelize = new Sequelize(`mariadb://${DB_HOST}/${DB_NAME}`, {
+  username: DB_USER,
+  password: DB_PASSWORD,
   dialectOptions: {
     timezone: 'Etc/GMT+8',
   },
+  logging: false,
 });
 
 module.exports = sequelize;

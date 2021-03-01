@@ -6,7 +6,9 @@
   "scripts": {
     "start": "NODE_ENV=production node src/index.js",
     "dev": "nodemon src/index.js",
-    "docs": "./node_modules/.bin/apidoc -i src/controllers -o docs"
+    "docs": "./node_modules/.bin/apidoc -i src/controllers -o docs",
+    "lint": "eslint src/**",
+    "lint-fix": "eslint src/** --fix"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -25,21 +27,21 @@
     "simple",
     "sequelize"
   ],
-  "author": "",
+  "author": "Kenneth Lloyd Verastigue",
   "license": "ISC",
   "dependencies": {
-    "apidoc": "^0.24.0",
+    "apidoc": "^0.26.0",
     "bcryptjs": "^2.4.3",
-    "config": "^3.3.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mariadb": "^2.4.2",
-    "moment": "^2.27.0",
-    "sequelize": "^6.3.4"
+    "mariadb": "^2.5.3",
+    "moment": "^2.29.1",
+    "sequelize": "^6.5.0"
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^6.11.0",
