@@ -1,5 +1,7 @@
-const authRouter = require('./auth');
+import authRouter from './auth.js';
 
-module.exports = (app) => {
+const initializeRouter = (app) => {
   app.use(authRouter);
 };
+
+export default initializeRouter;

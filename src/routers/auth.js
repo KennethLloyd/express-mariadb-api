@@ -1,7 +1,7 @@
-const express = require('express');
-const authenticate = require('../middleware/authenticate');
-const { authController } = require('../controllers');
-const { authValidator } = require('../validators');
+import express from 'express';
+import authenticate from '../middleware/authenticate.js';
+import { authController } from '../controllers/index.js';
+import { authValidator } from '../validators/index.js';
 
 const router = new express.Router();
 
@@ -14,4 +14,4 @@ router.put(
   authController.editProfile,
 );
 
-module.exports = router;
+export default router;

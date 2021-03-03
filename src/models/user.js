@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const sequelize = require('../db/sequelize');
+import Sequelize from 'sequelize';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import sequelize from '../db/sequelize.js';
+
+const { DataTypes } = Sequelize;
 
 const User = sequelize.define(
   'User',
@@ -76,4 +78,4 @@ User.beforeSave(async (userInstance) => {
   }
 });
 
-module.exports = User;
+export default User;

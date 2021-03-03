@@ -1,22 +1,22 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-
-require('dotenv').config();
-
-const initDB = require('./db/initialize');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import initDB from './db/initialize.js';
+import initRouters from './routers/index.js';
 
 const app = express();
 const port = process.env.PORT || 3001;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json()); // allows us to parse the request as json
 app.use(cors());
 app.use('/apidoc', express.static(path.join(__dirname, '../docs')));
 
-require('./routers')(app);
-
 (async () => {
   try {
+    initRouters(app);
     await initDB();
     console.log('Connection to database has been established successfully');
   } catch (error) {

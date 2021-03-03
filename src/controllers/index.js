@@ -1,5 +1,3 @@
-const authController = require('./auth');
+import authController from './auth.js';
 
-module.exports = {
-  authController,
-};
+export { authController };

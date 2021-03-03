@@ -12,7 +12,4 @@ const err = (statusCode, message) => {
   return error;
 };
 
-module.exports = {
-  formatUser,
-  err,
-};
+export { formatUser, err };

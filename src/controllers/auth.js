@@ -1,6 +1,8 @@
-const { Op } = require('sequelize');
-const { User } = require('../models');
-const { formatUser, err } = require('../helpers/utils');
+import Sequelize from 'sequelize';
+import { User } from '../models/index.js';
+import { formatUser, err } from '../helpers/utils.js';
+
+const { Op } = Sequelize;
 
 /**
 @api {post} /auth/signup Sign Up User
@@ -186,8 +188,10 @@ const editProfile = async (req, res) => {
   }
 };
 
-module.exports = {
+const authController = {
   logIn,
   signUp,
   editProfile,
 };
+
+export default authController;

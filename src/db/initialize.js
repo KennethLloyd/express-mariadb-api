@@ -1,5 +1,5 @@
-const mariadb = require('mariadb');
-const sequelize = require('./sequelize');
+import mariadb from 'mariadb';
+import sequelize from './sequelize.js';
 
 const initializeDB = async () => {
   const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
@@ -16,4 +16,4 @@ const initializeDB = async () => {
   await sequelize.sync({ alter: true }); // update schema
 };
 
-module.exports = initializeDB;
+export default initializeDB;
