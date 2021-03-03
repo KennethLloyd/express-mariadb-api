@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
@@ -11,4 +11,4 @@ const sequelize = new Sequelize(`mariadb://${DB_HOST}/${DB_NAME}`, {
   logging: false,
 });
 
-module.exports = sequelize;
+export default sequelize;

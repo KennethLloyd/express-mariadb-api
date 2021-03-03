@@ -1,4 +1,5 @@
 /node_modules
 /docs
 .eslintcache
-yarn.lock
+.env
+/dist

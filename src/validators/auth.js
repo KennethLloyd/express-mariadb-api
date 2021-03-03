@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const signUp = async (req, res, next) => {
   const bodySchema = Joi.object({
@@ -57,7 +57,7 @@ const editProfile = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export default {
   signUp,
   logIn,
   editProfile,
