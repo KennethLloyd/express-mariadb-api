@@ -1,5 +1,7 @@
 import authRouter from './auth.js';
 
-export default (app) => {
+const initializeRouter = (app) => {
   app.use(authRouter);
 };
+
+export default initializeRouter;

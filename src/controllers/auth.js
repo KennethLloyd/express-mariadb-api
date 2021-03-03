@@ -188,8 +188,10 @@ const editProfile = async (req, res) => {
   }
 };
 
-export default {
+const authController = {
   logIn,
   signUp,
   editProfile,
 };
+
+export default authController;

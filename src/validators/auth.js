@@ -57,8 +57,10 @@ const editProfile = async (req, res, next) => {
   }
 };
 
-export default {
+const authValidator = {
   signUp,
   logIn,
   editProfile,
 };
+
+export default authValidator;
