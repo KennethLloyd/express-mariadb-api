@@ -12,7 +12,7 @@ To setup in a new local environment:
 $ nvm use
 ```
 
-2. Setup environment variables by adding an .env file based on .env.example
+2. Setup environment variables by adding an `.env` file based on `.env.example`
 
 3. Install dependencies
 ```sh
