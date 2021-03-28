@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import sequelize from '../db/sequelize.js';
 
 const { DataTypes } = Sequelize;
@@ -64,7 +64,11 @@ User.findByCredentials = async (email, password) => {
     return null;
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const hashedPassword = crypto
+    .pbkdf2Sync(password, process.env.PASSWORD_SALT, 1000, 64, 'sha512')
+    .toString('hex');
+
+  const isMatch = hashedPassword === user.password;
 
   if (!isMatch) {
     return null;
@@ -72,9 +76,17 @@ User.findByCredentials = async (email, password) => {
   return user;
 };
 
-User.beforeSave(async (userInstance) => {
+User.beforeSave((userInstance) => {
   if (userInstance.changed('password')) {
-    userInstance.password = await bcrypt.hash(userInstance.password, 8);
+    userInstance.password = crypto
+      .pbkdf2Sync(
+        userInstance.password,
+        process.env.PASSWORD_SALT,
+        1000,
+        64,
+        'sha512',
+      )
+      .toString('hex');
   }
 });
 

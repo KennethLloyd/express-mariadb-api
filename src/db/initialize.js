@@ -1,10 +1,10 @@
-import mariadb from 'mariadb';
+import mysql from 'mysql2/promise';
 import sequelize from './sequelize.js';
 
 const initializeDB = async () => {
   const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-  const connection = await mariadb.createConnection({
+  const connection = await mysql.createConnection({
     host: DB_HOST,
     user: DB_USER,
     password: DB_PASSWORD,

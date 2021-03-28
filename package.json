@@ -1,13 +1,13 @@
 {
-  "name": "express-mariadb-api",
+  "name": "express-sequelize-starter",
   "version": "2.0.0",
   "type": "module",
-  "description": "Simple NodeJS Express Boilerplate with Sequelize as ORM",
+  "description": "NodeJS Express Boilerplate with Sequelize as ORM",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node -r dotenv/config src/index.js",
     "dev": "nodemon -r dotenv/config src/index.js",
-    "docs": "./node_modules/.bin/apidoc -i src/controllers -o docs",
+    "docs": "apidoc -i src/controllers -o docs",
     "lint": "eslint src/**",
     "lint-fix": "eslint src/** --fix",
     "version": "auto-changelog --template changelog-template.hbs -p && git add CHANGELOG.md"
@@ -36,24 +36,22 @@
     "boilerplate",
     "express",
     "jwt",
-    "mariadb",
     "node",
     "restful",
-    "simple",
     "sequelize"
   ],
   "author": "Kenneth Lloyd Verastigue",
   "license": "ISC",
   "dependencies": {
     "apidoc": "^0.26.0",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mariadb": "^2.5.3",
-    "sequelize": "^6.5.0"
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.16.1",
