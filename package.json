@@ -1,6 +1,6 @@
 {
   "name": "express-sequelize-starter",
-  "version": "2.4.0",
+  "version": "2.1.0",
   "type": "module",
   "description": "NodeJS Express Boilerplate with Sequelize as ORM",
   "main": "src/index.js",
