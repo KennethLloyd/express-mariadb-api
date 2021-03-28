@@ -16,27 +16,15 @@ const User = sequelize.define(
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
-      set(value) {
-        this.setDataValue('firstName', value.trim());
-      },
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
-      set(value) {
-        this.setDataValue('lastName', value.trim());
-      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: 'email',
-      set(value) {
-        this.setDataValue('email', value.trim().toLowerCase());
-      },
-      validate: {
-        isEmail: true,
-      },
     },
     password: {
       type: DataTypes.STRING,
