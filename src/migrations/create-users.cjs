@@ -20,7 +20,6 @@ module.exports = {
         email: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: 'email',
         },
         password: {
           type: Sequelize.STRING,

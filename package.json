@@ -7,6 +7,7 @@
   "scripts": {
     "start": "NODE_ENV=production node -r dotenv/config src/index.js",
     "db-migrate": "sequelize db:create && sequelize db:migrate",
+    "db-seed": "sequelize db:seed:all",
     "dev": "nodemon -r dotenv/config src/index.js",
     "docs": "apidoc -i src/controllers -o docs",
     "lint": "eslint src/**",
